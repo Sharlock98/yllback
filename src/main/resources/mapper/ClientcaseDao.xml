@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yllback.dao.ClientcaseDao">
+  <resultMap id="BaseResultMap" type="com.example.yllback.entity.Clientcase">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="CHAR" property="title" />
+    <result column="image" jdbcType="CHAR" property="image" />
+    <result column="date" jdbcType="DATE" property="date" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.yllback.entity.Clientcase">
+    <result column="details" jdbcType="LONGVARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, image, `date`
+  </sql>
+  <sql id="Blob_Column_List">
+    details
+  </sql>
+  <select id="selectAllCase" resultType="com.example.yllback.entity.Clientcase">
+    SELECT * FROM ClientCase ORDER BY id DESC
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ClientCase
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ClientCase
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.Clientcase" useGeneratedKeys="true">
+    insert into ClientCase (title, image, `date`, details
+      )
+    values (#{title,jdbcType=CHAR}, #{image,jdbcType=CHAR}, #{date,jdbcType=DATE}, #{details,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.Clientcase" useGeneratedKeys="true">
+    insert into ClientCase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=CHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=CHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yllback.entity.Clientcase">
+    update ClientCase
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=CHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=CHAR},
+      </if>
+      <if test="date != null">
+        `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.yllback.entity.Clientcase">
+    update ClientCase
+    set title = #{title,jdbcType=CHAR},
+      image = #{image,jdbcType=CHAR},
+      `date` = #{date,jdbcType=DATE},
+      details = #{details,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yllback.entity.Clientcase">
+    update ClientCase
+    set title = #{title,jdbcType=CHAR},
+      image = #{image,jdbcType=CHAR},
+      `date` = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

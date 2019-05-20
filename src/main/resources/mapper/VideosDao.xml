@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yllback.dao.VideosDao">
+  <resultMap id="BaseResultMap" type="com.example.yllback.entity.Videos">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="video" jdbcType="VARCHAR" property="video" />
+    <result column="video_name" jdbcType="CHAR" property="videoName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, video, video_name
+  </sql>
+  <select id="selectAllVideo" resultType="com.example.yllback.entity.Videos">
+    SELECT * FROM videos
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from videos
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from videos
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.Videos" useGeneratedKeys="true">
+    insert into videos (video, video_name)
+    values (#{video,jdbcType=VARCHAR}, #{videoName,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.Videos" useGeneratedKeys="true">
+    insert into videos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="video != null">
+        video,
+      </if>
+      <if test="videoName != null">
+        video_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="video != null">
+        #{video,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yllback.entity.Videos">
+    update videos
+    <set>
+      <if test="video != null">
+        video = #{video,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        video_name = #{videoName,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yllback.entity.Videos">
+    update videos
+    set video = #{video,jdbcType=VARCHAR},
+      video_name = #{videoName,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

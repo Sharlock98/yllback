@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yllback.dao.YllProductsDao">
+  <resultMap id="BaseResultMap" type="com.example.yllback.entity.YllProducts">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="type" jdbcType="CHAR" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.yllback.entity.YllProducts">
+    <result column="details" jdbcType="LONGVARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, image, `name`, `date`, `type`
+  </sql>
+  <sql id="Blob_Column_List">
+    details
+  </sql>
+  <select id="selectAllProducts" resultType="com.example.yllback.entity.YllProducts">
+    SELECT * FROM yll_products
+  </select>
+  <select id="selectByProductsType" resultType="com.example.yllback.entity.YllProducts">
+    SELECT * FROM yll_products WHERE type=#{type}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yll_products
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yll_products
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.YllProducts" useGeneratedKeys="true">
+    insert into yll_products (image, `name`, `date`, 
+      `type`, details)
+    values (#{image,jdbcType=VARCHAR}, #{name,jdbcType=CHAR}, #{date,jdbcType=DATE}, 
+      #{type,jdbcType=CHAR}, #{details,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.YllProducts" useGeneratedKeys="true">
+    insert into yll_products
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="image != null">
+        image,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yllback.entity.YllProducts">
+    update yll_products
+    <set>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=CHAR},
+      </if>
+      <if test="date != null">
+        `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.yllback.entity.YllProducts">
+    update yll_products
+    set image = #{image,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=CHAR},
+      `date` = #{date,jdbcType=DATE},
+      `type` = #{type,jdbcType=CHAR},
+      details = #{details,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yllback.entity.YllProducts">
+    update yll_products
+    set image = #{image,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=CHAR},
+      `date` = #{date,jdbcType=DATE},
+      `type` = #{type,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yllback.dao.CustomerMessageDao">
+  <resultMap id="BaseResultMap" type="com.example.yllback.entity.CustomerMessage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="head_img" jdbcType="CHAR" property="headImg" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="title" jdbcType="CHAR" property="title" />
+    <result column="image" jdbcType="CHAR" property="image" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="choiceness" jdbcType="INTEGER" property="choiceness" />
+    <result column="top" jdbcType="INTEGER" property="top" />
+    <result column="type" jdbcType="CHAR" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.yllback.entity.CustomerMessage">
+    <result column="details" jdbcType="LONGVARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, head_img, `time`, title, image, `status`, choiceness, `top`, `type`
+  </sql>
+  <sql id="Blob_Column_List">
+    details
+  </sql>
+  <select id="selectAllInformation" resultType="com.example.yllback.entity.CustomerMessage">
+    SELECT * FROM customer_message WHERE status='已审核' ORDER BY top DESC
+  </select>
+  <select id="selectBychoiceness" resultType="com.example.yllback.entity.CustomerMessage">
+    SELECT * FROM  customer_message WHERE choiceness=1 AND status='已审核'
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from customer_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.CustomerMessage" useGeneratedKeys="true">
+    insert into customer_message (`name`, head_img, `time`, 
+      title, image, `status`, choiceness, 
+      `top`, `type`, details
+      )
+    values (#{name,jdbcType=CHAR}, #{headImg,jdbcType=CHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=CHAR}, #{image,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{choiceness,jdbcType=INTEGER}, 
+      #{top,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, #{details,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.CustomerMessage" useGeneratedKeys="true">
+    insert into customer_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="headImg != null">
+        head_img,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="choiceness != null">
+        choiceness,
+      </if>
+      <if test="top != null">
+        `top`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="headImg != null">
+        #{headImg,jdbcType=CHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=CHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="choiceness != null">
+        #{choiceness,jdbcType=INTEGER},
+      </if>
+      <if test="top != null">
+        #{top,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yllback.entity.CustomerMessage">
+    update customer_message
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=CHAR},
+      </if>
+      <if test="headImg != null">
+        head_img = #{headImg,jdbcType=CHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=CHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="choiceness != null">
+        choiceness = #{choiceness,jdbcType=INTEGER},
+      </if>
+      <if test="top != null">
+        `top` = #{top,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.yllback.entity.CustomerMessage">
+    update customer_message
+    set `name` = #{name,jdbcType=CHAR},
+      head_img = #{headImg,jdbcType=CHAR},
+      `time` = #{time,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=CHAR},
+      image = #{image,jdbcType=CHAR},
+      `status` = #{status,jdbcType=CHAR},
+      choiceness = #{choiceness,jdbcType=INTEGER},
+      `top` = #{top,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=CHAR},
+      details = #{details,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yllback.entity.CustomerMessage">
+    update customer_message
+    set `name` = #{name,jdbcType=CHAR},
+      head_img = #{headImg,jdbcType=CHAR},
+      `time` = #{time,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=CHAR},
+      image = #{image,jdbcType=CHAR},
+      `status` = #{status,jdbcType=CHAR},
+      choiceness = #{choiceness,jdbcType=INTEGER},
+      `top` = #{top,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

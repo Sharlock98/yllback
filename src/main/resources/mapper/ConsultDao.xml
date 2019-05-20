@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yllback.dao.ConsultDao">
+  <resultMap id="BaseResultMap" type="com.example.yllback.entity.Consult">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="CHAR" property="title" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="type" jdbcType="CHAR" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.yllback.entity.Consult">
+    <result column="details" jdbcType="LONGVARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, `date`, `type`
+  </sql>
+  <sql id="Blob_Column_List">
+    details
+  </sql>
+  <!--<select id="selectByType" resultType="com.example.yllback.entity.Consult">-->
+    <!--SELECT * FROM consult WHERE -->
+  <!--</select>-->
+  <select id="selectAllConsult" resultType="com.example.yllback.entity.Consult">
+    SELECT * FROM consult ORDER BY id DESC
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from consult
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from consult
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.Consult" useGeneratedKeys="true">
+    insert into consult (title, `date`, `type`, details
+      )
+    values (#{title,jdbcType=CHAR}, #{date,jdbcType=DATE}, #{type,jdbcType=CHAR}, #{details,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.yllback.entity.Consult" useGeneratedKeys="true">
+    insert into consult
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=CHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yllback.entity.Consult">
+    update consult
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=CHAR},
+      </if>
+      <if test="date != null">
+        `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.yllback.entity.Consult">
+    update consult
+    set title = #{title,jdbcType=CHAR},
+      `date` = #{date,jdbcType=DATE},
+      `type` = #{type,jdbcType=CHAR},
+      details = #{details,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yllback.entity.Consult">
+    update consult
+    set title = #{title,jdbcType=CHAR},
+      `date` = #{date,jdbcType=DATE},
+      `type` = #{type,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
