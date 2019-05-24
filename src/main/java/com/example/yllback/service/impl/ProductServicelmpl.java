@@ -29,16 +29,16 @@ public class ProductServicelmpl implements ProductService{
 
     @Override
     public boolean addProduct(YllProducts yllProducts) {
-        return false;
+        return yllProductsDao.insert(yllProducts) > 0;
     }
 
     @Override
     public boolean modifyProducts(YllProducts yllProducts) {
-        return false;
+        return yllProductsDao.updateByPrimaryKeySelective(yllProducts) > 0;
     }
 
     @Override
     public boolean deleteProducts(int id) {
-        return false;
+        return yllProductsDao.deleteByPrimaryKey(id) > 0;
     }
 }

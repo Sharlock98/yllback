@@ -18,7 +18,7 @@
     details
   </sql>
   <select id="selectAllProducts" resultType="com.example.yllback.entity.YllProducts">
-    SELECT * FROM yll_products
+    SELECT * FROM yll_products ORDER BY id DESC
   </select>
   <select id="selectByProductsType" resultType="com.example.yllback.entity.YllProducts">
     SELECT * FROM yll_products WHERE type=#{type}

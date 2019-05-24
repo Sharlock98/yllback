@@ -3,6 +3,7 @@ package com.example.yllback.web;
 import com.example.yllback.entity.YllProducts;
 import com.example.yllback.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,4 +37,16 @@ public class ProductController {
         list.add(productService.getProductsListByType(type));
         return list;
     }
-}
+    @RequestMapping(value = "/deleteProducts",method = RequestMethod.GET)
+    private boolean deleteProducts(int id){
+        return (productService.deleteProducts(id));
+    }
+    @RequestMapping(value = "/modifyProducts", method = RequestMethod.POST)
+    private boolean modifyProducts(@RequestBody YllProducts yllProducts){
+        return productService.modifyProducts(yllProducts);
+    }
+    @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
+    private boolean addProduct(@RequestBody YllProducts yllProducts){
+        return productService.addProduct(yllProducts);
+    }
+    }
