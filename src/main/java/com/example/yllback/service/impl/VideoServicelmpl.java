@@ -35,6 +35,6 @@ public class VideoServicelmpl implements VideoService {
 
     @Override
     public boolean modifyVideo(Videos videos) {
-        return dao.updateByPrimaryKey(videos) > 0;
+        return dao.updateByPrimaryKeySelective(videos) > 0;
     }
 }

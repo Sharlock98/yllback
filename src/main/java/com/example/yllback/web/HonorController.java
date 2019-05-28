@@ -1,7 +1,9 @@
 package com.example.yllback.web;
 
+import com.example.yllback.entity.Honor;
 import com.example.yllback.service.HonorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +23,17 @@ public class HonorController {
         List<Object> list=new ArrayList<>();
         list.add(service.getAllHonor());
         return list;
+    }
+    @RequestMapping(value = "/deleteHonorById",method = RequestMethod.GET)
+    private boolean deleteHonorById(int id){
+        return service.deleteHonorById(id);
+    }
+    @RequestMapping(value = "/modifyHonor",method = RequestMethod.POST)
+    private boolean modifyHonor(@RequestBody Honor honor){
+        return service.modifyHonor(honor);
+    }
+    @RequestMapping(value = "/addHonor",method = RequestMethod.POST)
+    private boolean addHonor(@RequestBody Honor honor){
+        return service.addHonor(honor);
     }
 }

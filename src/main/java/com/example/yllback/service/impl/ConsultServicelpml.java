@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ConsultServicelpml implements ConsultService{
+public class ConsultServicelpml implements ConsultService {
     @Autowired
     private ConsultDao dao;
+
     @Override
     public List<Consult> getAllConsult() {
         return dao.selectAllConsult();
@@ -20,5 +21,20 @@ public class ConsultServicelpml implements ConsultService{
     @Override
     public Consult getConsultById(int id) {
         return dao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public boolean deleteConsult(int id) {
+        return dao.deleteByPrimaryKey(id) > 0;
+    }
+
+    @Override
+    public boolean motifyConsult(Consult consult) {
+        return dao.updateByPrimaryKeySelective(consult) > 0;
+    }
+
+    @Override
+    public boolean addConsult(Consult consult) {
+        return dao.insert(consult) > 0;
     }
 }

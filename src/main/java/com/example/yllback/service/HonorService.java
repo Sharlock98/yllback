@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface HonorService {
     List<Honor> getAllHonor();
+
+    boolean deleteHonorById(int id);
+
+    boolean modifyHonor(Honor honor);
+
+    boolean addHonor(Honor honor);
 }

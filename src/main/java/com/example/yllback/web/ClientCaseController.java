@@ -1,7 +1,9 @@
 package com.example.yllback.web;
 
+import com.example.yllback.entity.Clientcase;
 import com.example.yllback.service.ClientCaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,4 +30,16 @@ public class ClientCaseController {
         list.add(service.getCaseById(id));
         return list;
     }
-}
+    @RequestMapping(value = "/deleteCase",method = RequestMethod.GET)
+    private boolean deleteCase(int id){
+     return service.deleteCase(id);
+    }
+    @RequestMapping(value = "/motifyCase",method = RequestMethod.POST)
+    private boolean motifyCase(@RequestBody Clientcase clientcase){
+        return service.motifyCase(clientcase);
+    }
+    @RequestMapping(value = "/addCase",method = RequestMethod.POST)
+    private boolean addCase(@RequestBody Clientcase clientcase){
+        return service.addCase(clientcase);
+    }
+    }

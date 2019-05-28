@@ -10,7 +10,7 @@
     id, video, video_name
   </sql>
   <select id="selectAllVideo" resultType="com.example.yllback.entity.Videos">
-    SELECT * FROM videos
+    SELECT * FROM videos ORDER BY id DESC
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

@@ -21,4 +21,19 @@ public class ClientCaseServicelmpl implements ClientCaseService{
     public Clientcase getCaseById(int id) {
         return dao.selectByPrimaryKey(id);
     }
+
+    @Override
+    public boolean deleteCase(int id) {
+        return dao.deleteByPrimaryKey(id)>0;
+    }
+
+    @Override
+    public boolean motifyCase(Clientcase clientcase) {
+        return dao.updateByPrimaryKeySelective(clientcase)>0;
+    }
+
+    @Override
+    public boolean addCase(Clientcase clientcase) {
+        return dao.insert(clientcase)>0;
+    }
 }

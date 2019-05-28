@@ -9,4 +9,9 @@ public interface ClientCaseService {
 
     Clientcase getCaseById(int id);
 
+    boolean deleteCase(int id);
+
+    boolean motifyCase(Clientcase clientcase);
+
+    boolean addCase(Clientcase clientcase);
 }

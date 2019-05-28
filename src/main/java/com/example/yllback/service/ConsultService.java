@@ -8,4 +8,10 @@ public interface ConsultService {
     List<Consult> getAllConsult();
 
     Consult getConsultById(int id);
+
+    boolean deleteConsult(int id);
+
+    boolean motifyConsult(Consult consult);
+
+    boolean addConsult(Consult Consult);
 }
