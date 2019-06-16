@@ -7,6 +7,8 @@ import java.util.List;
 public interface CustomerMessageDao {
     List<CustomerMessage> selectAllInformation();
 
+    List<CustomerMessage> selectCheckInformation();
+
     List<CustomerMessage> selectBychoiceness();
 
     int deleteByPrimaryKey(Integer id);

@@ -20,6 +20,11 @@ public class CustomerServicelmpl implements CustomerService{
     }
 
     @Override
+    public List<CustomerMessage> getCheckInformation() {
+        return dao.selectCheckInformation();
+    }
+
+    @Override
     public List<CustomerMessage> getInformationBychoiceness() {
         return dao.selectBychoiceness();
     }
@@ -32,5 +37,15 @@ public class CustomerServicelmpl implements CustomerService{
     @Override
     public boolean addInformation(CustomerMessage customerMessage) {
         return dao.insert(customerMessage)>0;
+    }
+
+    @Override
+    public boolean motifyInformation(CustomerMessage customerMessage) {
+        return dao.updateByPrimaryKeySelective(customerMessage)>0;
+    }
+
+    @Override
+    public boolean deleteInformation(int id) {
+        return dao.deleteByPrimaryKey(id)>0;
     }
 }

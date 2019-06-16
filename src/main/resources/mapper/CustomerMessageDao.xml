@@ -23,6 +23,9 @@
     details
   </sql>
   <select id="selectAllInformation" resultType="com.example.yllback.entity.CustomerMessage">
+    SELECT * FROM customer_message ORDER BY top DESC
+  </select>
+  <select id="selectCheckInformation" resultType="com.example.yllback.entity.CustomerMessage">
     SELECT * FROM customer_message WHERE status='已审核' ORDER BY top DESC
   </select>
   <select id="selectBychoiceness" resultType="com.example.yllback.entity.CustomerMessage">

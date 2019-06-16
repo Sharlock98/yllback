@@ -24,6 +24,13 @@ public class CustomerController {
         list.add(service.getAllInformation());
         return list;
     }
+
+    @RequestMapping(value = "/getCheckInformation",method = RequestMethod.GET)
+    private List<Object> getCheckInformation(){
+        List<Object> list=new ArrayList<>();
+        list.add(service.getCheckInformation());
+        return list;
+    }
     @RequestMapping(value = "/getInformationBychoiceness",method = RequestMethod.GET)
     private List<Object> getInformationBychoiceness(){
         List<Object> list=new ArrayList<>();
@@ -36,10 +43,18 @@ public class CustomerController {
         list.add(service.getInformationById(id));
         return list;
     }
+    @RequestMapping(value = "/deleteInformation",method = RequestMethod.GET)
+    private boolean deleteInformation(int id){
+        return service.deleteInformation(id);
+    }
     @RequestMapping(value = "/addInformation",method = RequestMethod.POST)
     private List<Object> addInformation(@RequestBody CustomerMessage customerMessage){
         List<Object> list=new ArrayList<>();
         list.add(service.addInformation(customerMessage));
         return list;
+    }
+    @RequestMapping(value = "/motifyInformation",method = RequestMethod.POST)
+    private boolean motifyInformation(@RequestBody CustomerMessage customerMessage){
+        return service.motifyInformation(customerMessage);
     }
 }

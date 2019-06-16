@@ -32,4 +32,9 @@ public class ProblemServiselmpl implements ProblemService{
     public boolean deleteQuestion(int id) {
         return dao.deleteByPrimaryKey(id) > 0;
     }
+
+    @Override
+    public boolean motifyQuestion(CommonProblem commonProblem) {
+        return dao.updateByPrimaryKeySelective(commonProblem)>0;
+    }
 }

@@ -9,4 +9,5 @@ public interface ProblemService {
     CommonProblem getQuestionById(int id);
     boolean addQuestion(CommonProblem commonProblem);
     boolean deleteQuestion(int id);
+    boolean motifyQuestion(CommonProblem commonProblem);
 }
