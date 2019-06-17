@@ -11,5 +11,5 @@ public interface PartnerService {
 
     boolean addPartner(Partner partner);
 
-    boolean motifyPartner(Partner partner);
+    boolean modifyPartner(Partner partner);
 }

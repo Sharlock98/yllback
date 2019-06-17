@@ -41,6 +41,7 @@ public class ProductController {
     private boolean deleteProducts(int id){
         return productService.deleteProducts(id);
     }
+
     @RequestMapping(value = "/modifyProducts", method = RequestMethod.POST)
     private boolean modifyProducts(@RequestBody YllProducts yllProducts){
         return productService.modifyProducts(yllProducts);

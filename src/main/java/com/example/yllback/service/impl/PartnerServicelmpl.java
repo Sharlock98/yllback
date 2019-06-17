@@ -29,7 +29,7 @@ public class PartnerServicelmpl implements PartnerService {
     }
 
     @Override
-    public boolean motifyPartner(Partner partner) {
-        return dao.updateByPrimaryKey(partner) > 0;
+    public boolean modifyPartner(Partner partner) {
+        return dao.updateByPrimaryKeySelective(partner) > 0;
     }
 }

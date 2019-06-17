@@ -34,10 +34,12 @@ public class ConsultCcontroller {
     private boolean deleteConsult(int id){
         return service.deleteConsult(id);
     }
+
     @RequestMapping(value = "/motifyConsult",method = RequestMethod.POST)
     private boolean motifyConsult(@RequestBody Consult consult){
         return service.motifyConsult(consult);
     }
+
     @RequestMapping(value = "/addConsult",method = RequestMethod.POST)
     private boolean addConsult(@RequestBody Consult consult){
         return service.addConsult(consult);

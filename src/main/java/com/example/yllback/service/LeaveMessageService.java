@@ -4,7 +4,7 @@ import com.example.yllback.entity.LeaveMessage;
 
 import java.util.List;
 
-public interface MessageService {
+public interface LeaveMessageService {
     List<LeaveMessage> getAllMessage();
 
     LeaveMessage getMessageById(int id);
@@ -12,4 +12,6 @@ public interface MessageService {
     boolean addMessage(LeaveMessage leaveMessage);
 
     boolean deleteMessage(int id);
+
+    boolean modifyMessage(LeaveMessage leaveMessage);
 }
