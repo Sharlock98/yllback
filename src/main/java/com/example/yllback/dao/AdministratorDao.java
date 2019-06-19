@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface AdministratorDao {
+    List<Administrator> selectAllAccount();
+
     List<Administrator> selectByaccount(@Param("account") String account,@Param("password") String password);
 
     int deleteByPrimaryKey(Integer id);

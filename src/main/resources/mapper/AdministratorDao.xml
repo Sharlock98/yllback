@@ -9,6 +9,9 @@
   <sql id="Base_Column_List">
     id, account, `password`
   </sql>
+  <select id="selectAllAccount" resultType="com.example.yllback.entity.Administrator">
+    SELECT * FROM administrator
+  </select>
   <select id="selectByaccount" resultType="com.example.yllback.entity.Administrator">
     SELECT * FROM administrator WHERE account=#{account} AND password=#{password}
   </select>

@@ -17,4 +17,25 @@ public class AdministratorSreviselmpl implements AdministratorService {
     public List<Administrator> getAccount(String account,String password) {
         return dao.selectByaccount(account,password);
     }
+
+    @Override
+    public List<Administrator> getAllAccount() {
+        return dao.selectAllAccount();
+    }
+
+
+    @Override
+    public boolean deleteAccount(int id) {
+        return dao.deleteByPrimaryKey(id)>0;
+    }
+
+    @Override
+    public boolean addAccount(Administrator administrator) {
+        return dao.insert(administrator)>0;
+    }
+
+    @Override
+    public boolean modifyAccount(Administrator administrator) {
+        return dao.updateByPrimaryKeySelective(administrator)>0;
+    }
 }
